@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+class App extends Component {
+  state = {}
+
+  componentDidMount() {}
+
+  componentWillUpdate() {} // might not use
+
+  componentWillUnmount() {} // might not use
+
+  render() {}
 }
 
 export default App;
