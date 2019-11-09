@@ -3,8 +3,9 @@ import "./App.css";
 
 import axios from "axios";
 
-import GithubCard from './components/GithubCard/GithubCard';
+import GithubCard from "./components/GithubCard/GithubCard";
 import Loader from "./components/ui/Loader/Loader";
+import UserLookupForm from './components/Form/UserLookupForm';
 
 class App extends Component {
   state = {
@@ -12,6 +13,7 @@ class App extends Component {
   };
 
   fetchData = async github => {
+    this.setState({loading: true, user: null})
     return await axios.get(`https://api.github.com/users/${github}`);
   };
 
@@ -53,12 +55,23 @@ class App extends Component {
 
   // Display data => create Card
 
-  componentDidMount = async () => {
+  // added functionality
+  searchUser = async username => {
     try {
-      const data = await this.fetchData("ivictoris");
+      const data = await this.fetchData(username);
       this.saveData(data);
     } catch (e) {
+      console.log("Search for user failed", e);
+      this.setState({loading: false})
+    }
+  };
+
+  componentDidMount = async () => {
+    try {
+      this.searchUser("ivictoris");
+    } catch (e) {
       console.error("Data fetching error", e);
+      this.setState({loading: false})
     }
   };
 
@@ -71,8 +84,10 @@ class App extends Component {
 
     return (
       <div>
+        <UserLookupForm searchUser={this.searchUser} />
         {loading && <Loader />}
-        {!loading && <GithubCard {...user} />}
+        {!loading && !user && <h2>Handle does not exist!</h2>}
+        {!loading && user && <GithubCard {...user} />}
       </div>
     );
   }
