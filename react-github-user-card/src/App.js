@@ -3,6 +3,9 @@ import "./App.css";
 
 import axios from "axios";
 
+import GithubCard from './components/GithubCard/GithubCard';
+import Loader from "./components/ui/Loader/Loader";
+
 class App extends Component {
   state = {
     loading: true
@@ -64,23 +67,12 @@ class App extends Component {
   componentWillUnmount() {} // might not use
 
   render() {
-    let avatar_url, bio, location, login, name, html_url;
     const { loading, user } = this.state;
-    if (!loading) {
-      ({ avatar_url, bio, location, login, name, html_url } = user);
-    }
+
     return (
       <div>
-        {!loading && (
-          // Card component
-          <section className="card">
-            <img src={avatar_url} alt="github avatar" className="avatar" />
-            <a href={html_url}>@{login}</a>
-            <section className="name">{name}</section>
-            <section className="location">Located: {location}</section>
-            <section className="bio">Bio: {bio}</section>
-          </section>
-        )}
+        {loading && <Loader />}
+        {!loading && <GithubCard {...user} />}
       </div>
     );
   }
