@@ -77,7 +77,7 @@ class App extends Component {
             <img src={avatar_url} alt="github avatar" className="avatar" />
             <a href={html_url}>@{login}</a>
             <section className="name">{name}</section>
-            <section className="location">Located: ${location}</section>
+            <section className="location">Located: {location}</section>
             <section className="bio">Bio: {bio}</section>
           </section>
         )}
