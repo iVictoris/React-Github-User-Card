@@ -1,3 +1,10 @@
+*:before,
+*,
+*:after {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
 .App {
   text-align: center;
 }
@@ -19,4 +26,22 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.card {
+  width: 200px;
+  box-shadow: 1px 1px 0px 0px gray;
+  margin: 5px;
+  padding-bottom: 5px;
+}
+
+.card-img-top {
+  margin-bottom: 5px;
+}
+
+.card-text {
+  margin: 0 auto;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  width: 85%;
 }
